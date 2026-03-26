@@ -1,0 +1,19 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:ponyTest="clr-namespace:PonyTest"
+        xmlns:viewModels="clr-namespace:PonyTest.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="PonyTest.Views.ResultWindow"
+        x:DataType="viewModels:ResultWindowViewModel"
+        Title="ResultWindow">
+    <StackPanel>
+        <Label Content="{Binding Title}"/>
+        <Label Content="{Binding Result.user}"/>
+        <Label Content="{Binding Result.score}"/>
+        <Label Content="{Binding Result.grade}"/>
+        <Label Content="{Binding Result.Date, StringFormat=dd.MM.yyyy}"/>
+        
+    </StackPanel>
+</Window>

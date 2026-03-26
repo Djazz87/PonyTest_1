@@ -16,7 +16,7 @@ public class QuestionRepository
     public List<Question> GetQuestionsByTest(TestData test)
     {
         List<Question> questions = new List<Question>();
-        string sql = "SELECT * FROM questions WHERE test_id = " + test.Id;
+        string sql = "SELECT * FROM Questions WHERE test_id = " + test.Id;
 
         try
         {
@@ -34,7 +34,7 @@ public class QuestionRepository
                         OptionA = dr.GetString("option_a"),
                         OptionB = dr.GetString("option_b"),
                         OptionC = dr.GetString("option_c"),
-                        CorectOption = dr.GetChar("corect_option")
+                        CorectOption = dr.GetChar("correct_option")
                     });
                 }
             }

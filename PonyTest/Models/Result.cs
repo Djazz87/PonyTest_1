@@ -4,10 +4,10 @@ namespace PonyTest.DB;
 
 public class Result
 {
-    public string UserName { get; set; }
-    public int TestId { get; set; }
-    public double Score { get; set; }
-    public string Grade { get; set; }
+    public string user { get; set; }
+    public int testid { get; set; }
+    public double score { get; set; }
+    public string grade { get; set; }
     public DateTime Date { get; set; }
    
 }

@@ -29,6 +29,7 @@ sealed class Program
             s.AddTransient<TestWindow>();
             s.AddTransient<TestWindowViewModel>();
             s.AddTransient<QuestionRepository>();
+            s.AddTransient<ResultRepository>();
 
         }).Build();
         BuildAvaloniaApp(host.Services)

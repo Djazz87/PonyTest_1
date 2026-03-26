@@ -9,27 +9,27 @@
         x:DataType="viewModels1:TestWindowViewModel"
         Title="TestWindow">
     
-    <Grid RowDefinitions="* Auto Auto Auto *"
-          ColumnDefinitions="* Auto Auto *">
-        <ListBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Questions}" 
-                 DisplayMemberBinding="{Binding QuestionText}"
-                 SelectedItem="{Binding SelectedQuestion}">
+    <Grid ColumnDefinitions="* *" RowDefinitions="* Auto " >
+          
+        <ListBox  ItemsSource="{Binding Questions}" 
+                  SelectedItem="{Binding SelectedQuestion}"
+                  DisplayMemberBinding="{Binding QuestionText}">
         </ListBox>
-        <StackPanel Grid.Row="2" Grid.Column="2">
+        <StackPanel Grid.Column="1">
             <TextBlock Text="{Binding SelectedQuestion.QuestionText}"></TextBlock>
-            <RadioButton IsChecked="{Binding SelectA}"></RadioButton>
-            <RadioButton IsChecked="{Binding SelectB}"></RadioButton>
-            <RadioButton IsChecked="{Binding SelectC}"></RadioButton>
+            <RadioButton Content="A" IsChecked="{Binding SelectA}"></RadioButton>
+            <RadioButton Content="B" IsChecked="{Binding SelectB}"></RadioButton>
+            <RadioButton Content="C" IsChecked="{Binding SelectC}"></RadioButton>
         </StackPanel>
         
-        <StackPanel Grid.Row="2" Grid.Column="1"
+        <StackPanel Grid.Row="1" Grid.ColumnSpan="1"
                     HorizontalAlignment="Center"
                     Orientation="Horizontal">
             <Button Content="Назад" Command="{Binding PreviousCommand}"/>
             <Button Content="Вперед" Command="{Binding NextCommand}"/>
             <Button Content="Завершить"
                     IsVisible="{Binding AllAnswersDone}"
-                    />
+                    Command="{Binding EndTestCommand}"/>
         </StackPanel>
         
     </Grid>

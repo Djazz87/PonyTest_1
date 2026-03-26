@@ -5,11 +5,14 @@ using System.Linq;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using PonyTest.DB;
+using PonyTest.Views;
 
 namespace PonyTest.ViewModels;
 
 public partial class TestWindowViewModel : ViewModelBase
 {
+    private readonly IServiceProvider _serviceProvider;
+    private readonly ResultRepository _resultRepository;
     private readonly TestData _test;
     [ObservableProperty] private string _userName;
     [ObservableProperty] List<Question> _questions;
@@ -80,9 +83,11 @@ public partial class TestWindowViewModel : ViewModelBase
     
     
     public TestWindowViewModel(IServiceProvider serviceProvider, 
-        QuestionRepository questionRepository,
+        QuestionRepository questionRepository, ResultRepository resultRepository,
         TestData test)
     {
+        _serviceProvider = serviceProvider;
+        _resultRepository = resultRepository;
         _test = test;
         Questions = questionRepository.GetQuestionsByTest(test);
         Title = test.Title;
@@ -121,22 +126,27 @@ public partial class TestWindowViewModel : ViewModelBase
     public void EndTest()
     {
         Result result = CalculateResult();
-        
+        _resultRepository.InsertResult(result);
+        ResultWindow win = new();
+        ResultWindowViewModel vm = new(result, Title);
+        win.DataContext = vm;
+        win.Show();
+
     }
 
     private Result CalculateResult()
     {
         Result result = new Result();
         result.Date = DateTime.Now;
-        result.UserName = UserName;
-        result.TestId = _test.Id;
+        result.user = UserName;
+        result.testid = _test.Id;
         double right = 100.0 / Questions.Count;
         foreach (var q in Questions)
         {
             if (answers[q] == q.CorectOption)
-                result.Score += right;
+                result.score += right;
         }
-        result.Grade = result.Score switch
+        result.grade = result.score switch
         {
             >= 90 => "5", 
             >= 70 => "4",
