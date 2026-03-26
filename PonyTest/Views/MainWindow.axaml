@@ -8,13 +8,18 @@
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/avalonia-logo.ico"
         Title="PonyTest">
-
-    <Design.DataContext>
-        <!-- This only sets the DataContext for the previewer in an IDE,
-             to set the actual DataContext for runtime, set the DataContext property in code (look at App.axaml.cs) -->
-        <vm:MainWindowViewModel/>
-    </Design.DataContext>
-
-    <TextBlock Text="{Binding Greeting}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-
+    
+    <Grid RowDefinitions="* Auto Auto *"
+          ColumnDefinitions="* Auto *">
+        <TextBox Grid.Column="1" Grid.Row="1" Watermark="Имя" Text="{Binding Username}"></TextBox>
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+            <ComboBox PlaceholderText="Выбери" HorizontalAlignment="Left" Width="190" ItemsSource="{Binding TestData}"
+                      SelectedItem="{Binding SelectedTestData}"
+                      DisplayMemberBinding="{Binding Title}">
+                
+            </ComboBox>
+            <Button Command="{Binding StartTestCommand}" HorizontalAlignment="Right">Start Test</Button>
+        </StackPanel>
+    </Grid>
+        
 </Window>

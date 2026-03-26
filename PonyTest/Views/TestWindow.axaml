@@ -2,8 +2,35 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:PonyTest"
+        xmlns:viewModels1="clr-namespace:PonyTest.ViewModels"
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
         x:Class="PonyTest.Views.TestWindow"
+        x:DataType="viewModels1:TestWindowViewModel"
         Title="TestWindow">
-    Welcome to Avalonia!
+    
+    <Grid RowDefinitions="* Auto Auto Auto *"
+          ColumnDefinitions="* Auto Auto *">
+        <ListBox Grid.Row="1" Grid.Column="1" ItemsSource="{Binding Questions}" 
+                 DisplayMemberBinding="{Binding QuestionText}"
+                 SelectedItem="{Binding SelectedQuestion}">
+        </ListBox>
+        <StackPanel Grid.Row="2" Grid.Column="2">
+            <TextBlock Text="{Binding SelectedQuestion.QuestionText}"></TextBlock>
+            <RadioButton IsChecked="{Binding SelectA}"></RadioButton>
+            <RadioButton IsChecked="{Binding SelectB}"></RadioButton>
+            <RadioButton IsChecked="{Binding SelectC}"></RadioButton>
+        </StackPanel>
+        
+        <StackPanel Grid.Row="2" Grid.Column="1"
+                    HorizontalAlignment="Center"
+                    Orientation="Horizontal">
+            <Button Content="Назад" Command="{Binding PreviousCommand}"/>
+            <Button Content="Вперед" Command="{Binding NextCommand}"/>
+            <Button Content="Завершить"
+                    IsVisible="{Binding AllAnswersDone}"
+                    />
+        </StackPanel>
+        
+    </Grid>
 </Window>
